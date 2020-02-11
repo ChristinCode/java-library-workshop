@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>WeCanCodeIT Library Books</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/layout.css">
+</head>
+
+<body>
+    <header class="header">
+        <h1 class="header__title">Welcome to the WeCanCodeIT Library</h1>
+    </header>
+    <section class="book-list">
+        <h2 class="book-list__heading">Here is a list of our books:</h2>
+        <nav class="book-list-nav">
+            <ul class="book-list-links">
+                <li th:each="book:${booksAttribute}" class="book-list-links__book">
+                    <a th:text="${book.title}" class="book-list-links__link" th:href="@{'/book/'+ ${book.isbn}}">Refactoring</a>
+                </li>
+
+            </ul>
+        </nav>
+    </section>
+</body>
+
+</html>
