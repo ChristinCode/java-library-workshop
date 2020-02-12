@@ -19,7 +19,7 @@
         <h2 class="book-list__heading">Here is a list of our books:</h2>
         <nav class="book-list-nav">
             <ul class="book-list-links">
-                <li th:each="book:${booksAttribute}" class="book-list-links__book">
+                <li th:each="book:${campus.books}" class="book-list-links__book">
                     <a th:text="${book.title}" class="book-list-links__link" th:href="@{'/book/'+ ${book.isbn}}">Refactoring</a>
                 </li>
 
