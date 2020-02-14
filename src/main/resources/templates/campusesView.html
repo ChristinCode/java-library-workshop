@@ -10,7 +10,7 @@
 <body>
 <h1>We Can Code Libraries</h1>
 
-<h2 th:each="campus:${campuses}"><a th:text="${campus.location}" th:href="@{'/campus/'+ ${campus.location}}">Campus</a>
+<h2 th:each="campus:${campuses}"><a th:text="${campus.location}" th:href="@{'/campuses/'+ ${campus.location}}">Campus</a>
 </h2>
 </body>
 </html>

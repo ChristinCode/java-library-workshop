@@ -14,7 +14,13 @@ public class Populator implements CommandLineRunner {
     }
     @Override
     public void run(String... args) throws Exception {
-        campusStorage.store(new Campus("Columbus"));
+        System.out.println("POPULATOR IS RUNNING");
+        Campus columbus = new Campus("Columbus");
+        campusStorage.store(columbus);
+        Campus cleveland = new Campus("Cleveland");
+        campusStorage.store(cleveland);
+        Campus theMoon = new Campus("THE MOON");
+        campusStorage.store(theMoon);
 
     }
 }

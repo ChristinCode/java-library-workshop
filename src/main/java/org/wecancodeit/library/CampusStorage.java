@@ -6,4 +6,6 @@ public interface CampusStorage {
     Collection<Campus> findAllCampuses();
 
     void store(Campus campus);
+
+    Campus findCampusByLocation(String campusLocation);
 }

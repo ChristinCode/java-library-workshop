@@ -14,17 +14,18 @@
 <body>
     <header class="header">
         <h1 class="header__title">Welcome to the WeCanCodeIT Library</h1>
+        <h2 th:text = "${campus.location}">Location</h2>
     </header>
     <section class="book-list">
         <h2 class="book-list__heading">Here is a list of our books:</h2>
-        <nav class="book-list-nav">
-            <ul class="book-list-links">
-                <li th:each="book:${campus.books}" class="book-list-links__book">
-                    <a th:text="${book.title}" class="book-list-links__link" th:href="@{'/book/'+ ${book.isbn}}">Refactoring</a>
-                </li>
+<!--        <nav class="book-list-nav">-->
+<!--            <ul class="book-list-links">-->
+<!--                <li th:each="book:${campus.books}" class="book-list-links__book">-->
+<!--                    <a th:text="${book.title}" class="book-list-links__link" th:href="@{'/book/'+ ${book.isbn}}">Refactoring</a>-->
+<!--                </li>-->
 
-            </ul>
-        </nav>
+<!--            </ul>-->
+<!--        </nav>-->
     </section>
 </body>
 
