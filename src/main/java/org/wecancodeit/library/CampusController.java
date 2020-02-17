@@ -1,5 +1,6 @@
 package org.wecancodeit.library;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,9 +11,10 @@ public class CampusController {
 
     private CampusStorage campusStorage;
 
-    public CampusController(CampusStorage campusStorage) {
+    public CampusController(CampusStorage campusStorage){
         this.campusStorage = campusStorage;
     }
+
 
     @RequestMapping("/campuses")
     public String displayCampuses(Model model){
