@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class Populator implements CommandLineRunner {
-    @Autowired
+
     CampusStorage campusStorage;
 
     public Populator(CampusStorage campusStorage){
@@ -15,6 +15,7 @@ public class Populator implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         campusStorage.store(new Campus("Columbus"));
-
+        campusStorage.store(new Campus("Cleveland"));
+        campusStorage.store(new Campus("THE MOON"));
     }
 }
