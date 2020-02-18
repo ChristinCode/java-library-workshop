@@ -3,6 +3,8 @@ package org.wecancodeit.library;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import java.util.Collection;
 import java.util.Objects;
 
 @Entity
@@ -12,14 +14,22 @@ public class Campus {
     @GeneratedValue
     private Long id;
     private String location;
+    @OneToMany(mappedBy = "campus")
+    private Collection<Book> books;
 
-    public Campus(String location){
-
+    public Campus(String location) {
         this.location = location;
     }
-    public Campus(){}
+
+    public Campus() {
+    }
+
     public String getLocation() {
         return location;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     @Override
@@ -33,5 +43,9 @@ public class Campus {
     @Override
     public int hashCode() {
         return Objects.hash(location);
+    }
+
+    public Collection<Book> getBooks() {
+        return books;
     }
 }

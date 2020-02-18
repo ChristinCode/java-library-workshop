@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import java.util.Collection;
 import java.util.HashMap;
 
-@Service
+
 public class MapCampusStorage implements CampusStorage {
     private HashMap<String, Campus> campuses;
 
