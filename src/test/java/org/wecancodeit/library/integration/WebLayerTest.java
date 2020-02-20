@@ -8,6 +8,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.wecancodeit.library.models.Campus;
+import org.wecancodeit.library.storage.BookStorage;
 import org.wecancodeit.library.storage.CampusStorage;
 
 import static org.mockito.Mockito.when;
@@ -23,7 +24,8 @@ public class WebLayerTest {
     private MockMvc mockMvc;
     @MockBean
     CampusStorage mockStorage;
-
+    @MockBean
+    BookStorage bookStorage;
     @Test
     public void campusesShouldBeOKAndReturnTheCampusesViewWithCampusesModelAttribute() throws Exception {
         mockMvc.perform(get("/campuses"))

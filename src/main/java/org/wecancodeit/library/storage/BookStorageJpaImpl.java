@@ -1,8 +1,10 @@
 package org.wecancodeit.library.storage;
 
+import org.springframework.stereotype.Service;
 import org.wecancodeit.library.models.Book;
 import org.wecancodeit.library.storage.repositories.BookRepository;
 
+@Service
 public class BookStorageJpaImpl implements BookStorage {
     private BookRepository bookRepository;
 
@@ -12,6 +14,11 @@ public class BookStorageJpaImpl implements BookStorage {
 
     @Override
     public Book findBookById(long id) {
-        return null;
+        return bookRepository.findById(id).get();
+    }
+
+    @Override
+    public void store(Book bookToStore) {
+        bookRepository.save(bookToStore);
     }
 }
