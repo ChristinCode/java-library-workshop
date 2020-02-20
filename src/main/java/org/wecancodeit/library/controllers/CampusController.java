@@ -2,10 +2,11 @@ package org.wecancodeit.library.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.wecancodeit.library.models.Campus;
 import org.wecancodeit.library.storage.CampusStorage;
+
+import javax.persistence.GeneratedValue;
 
 @Controller
 public class CampusController {
@@ -23,11 +24,16 @@ public class CampusController {
         return "campusesView";
     }
 
-    @RequestMapping("/campuses/{campusLocation}")
+    @GetMapping("/campuses/{campusLocation}")
     public String displaySingleCampus(@PathVariable String campusLocation, Model model) {
         Campus retrievedCampus = campusStorage.findCampusByLocation(campusLocation);
         model.addAttribute("campus", retrievedCampus);
 
         return "campusView";
+    }
+    @PostMapping("/add-campus")
+    public String  addCampus(@RequestParam String location) {
+        campusStorage.store(new Campus(location));
+        return "redirect:campuses";
     }
 }

@@ -28,6 +28,10 @@
         </ul>
     </nav>
     <a class="nav__home" href="/campuses">back to campuses</a>
+    <form th:action="'/campuses/'+ ${campus.location} + '/add-book'" method="POST">
+        <input type="hidden" name="campusId" th:value="${campus.id}">
+        <input type="text">
+    </form>
 </section>
 </body>
 

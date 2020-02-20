@@ -14,6 +14,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -62,7 +63,7 @@ public class CampusControllerTest {
     }
 
     @Test
-    public void campusControllerShouldInstantiate() throws Exception {
+    public void campusesEndPointDisplaysAllCampuses() throws Exception {
         Campus testCampus = new Campus("Columbus");
 
         List<Campus> campusCollection = Collections.singletonList(testCampus);
@@ -73,5 +74,23 @@ public class CampusControllerTest {
                .andExpect(view().name("campusesView"))
                .andExpect(model().attributeExists("campuses"))
                .andExpect(model().attribute("campuses", campusCollection));
+    }
+    @Test
+    public void addCampusShouldRedirectToCampusesEndPoint(){
+        String result =underTest.addCampus("Testville");
+        assertThat(result).isEqualTo("redirect:campuses");
+    }
+    @Test
+    public void addCampusShouldStoreANewCampus(){
+        underTest.addCampus("Testville");
+        verify(mockStorage).store(new Campus("Testville"));
+    }
+    @Test
+    public void addCampusEndpointShouldAddNewCampus() throws Exception {
+        mockMvc.perform(post("/add-campus")
+                            .param("location", "Testing Town"))
+                .andDo(print())
+                .andExpect(status().is3xxRedirection());
+        verify(mockStorage).store(new Campus("Testing Town"));
     }
 }
