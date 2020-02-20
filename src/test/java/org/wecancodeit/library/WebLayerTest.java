@@ -7,6 +7,8 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
+
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -19,13 +21,24 @@ public class WebLayerTest {
     private MockMvc mockMvc;
     @MockBean
     CampusStorage mockStorage;
+
     @Test
     public void campusesShouldBeOKAndReturnTheCampusesViewWithCampusesModelAttribute() throws Exception {
         mockMvc.perform(get("/campuses"))
-                .andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(view().name("campusesView"))
-                .andExpect(model().attributeExists("campuses"));
+               .andDo(print())
+               .andExpect(status().isOk())
+               .andExpect(view().name("campusesView"))
+               .andExpect(model().attributeExists("campuses"));
+    }
+
+    @Test
+    public void shouldReceiveOKFromSingleCampusEndpoint() throws Exception {
+        Campus testCampus = new Campus("Testerville");
+        when(mockStorage.findCampusByLocation("Testerville")).thenReturn(testCampus);
+        mockMvc.perform(get("/campuses/Testerville"))
+               .andExpect(status().isOk())
+               .andExpect(view().name("campusView"))
+               .andExpect(model().attributeExists("campus"));;
     }
 
 }
