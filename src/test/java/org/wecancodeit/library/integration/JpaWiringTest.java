@@ -29,9 +29,9 @@ public class JpaWiringTest {
     @Test
     public void campusShouldHaveAListOfBooks() {
         Campus testCampus = new Campus("Testville");
-        Author testAuthor1= new Author("Testy", "McTesterson");
+        Author testAuthor1 = new Author("Testy", "McTesterson");
 
-        Book testBook = new Book("Title", testCampus, testAuthor1);
+        Book testBook = new Book("Title", "Test Description", testCampus, testAuthor1);
         authorRepo.save(testAuthor1);
         campusRepo.save(testCampus);
         bookRepo.save(testBook);
@@ -48,13 +48,13 @@ public class JpaWiringTest {
     }
 
     @Test
-    public void booksShouldBeAbleToHaveMultipleAuthors(){
-        Author testAuthor1= new Author("Testy", "McTesterson");
+    public void booksShouldBeAbleToHaveMultipleAuthors() {
+        Author testAuthor1 = new Author("Testy", "McTesterson");
         Author testAuthor2 = new Author("Bobby", "Testerson");
         Campus testCampus = new Campus("Test Town");
-        Book testBook1 = new Book("Title1", testCampus, testAuthor1, testAuthor2);
-        Book testBook2 = new Book("Title2", testCampus, testAuthor2);
-        Book testBook3 = new Book("Title3", testCampus, testAuthor1);
+        Book testBook1 = new Book("Title1", "Test Description", testCampus, testAuthor1, testAuthor2);
+        Book testBook2 = new Book("Title2", "Test Description", testCampus, testAuthor2);
+        Book testBook3 = new Book("Title3", "Test Description", testCampus, testAuthor1);
         authorRepo.save(testAuthor1);
         authorRepo.save(testAuthor2);
         campusRepo.save(testCampus);

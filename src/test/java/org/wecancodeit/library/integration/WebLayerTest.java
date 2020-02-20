@@ -20,12 +20,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest
 public class WebLayerTest {
 
-    @Autowired
-    private MockMvc mockMvc;
     @MockBean
     CampusStorage mockStorage;
     @MockBean
     BookStorage bookStorage;
+    @Autowired
+    private MockMvc mockMvc;
+
     @Test
     public void campusesShouldBeOKAndReturnTheCampusesViewWithCampusesModelAttribute() throws Exception {
         mockMvc.perform(get("/campuses"))
@@ -42,7 +43,7 @@ public class WebLayerTest {
         mockMvc.perform(get("/campuses/Testerville"))
                .andExpect(status().isOk())
                .andExpect(view().name("campusView"))
-               .andExpect(model().attributeExists("campus"));;
+               .andExpect(model().attributeExists("campus"));
     }
 
 }

@@ -6,7 +6,7 @@ import org.wecancodeit.library.storage.repositories.BookRepository;
 
 @Service
 public class BookStorageJpaImpl implements BookStorage {
-    private BookRepository bookRepository;
+    private final BookRepository bookRepository;
 
     public BookStorageJpaImpl(BookRepository bookRepository) {
         this.bookRepository = bookRepository;

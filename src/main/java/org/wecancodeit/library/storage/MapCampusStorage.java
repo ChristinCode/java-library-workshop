@@ -7,11 +7,12 @@ import java.util.HashMap;
 
 
 public class MapCampusStorage implements CampusStorage {
-    private HashMap<String, Campus> campuses;
+    private final HashMap<String, Campus> campuses;
 
-    public MapCampusStorage(){
+    public MapCampusStorage() {
         campuses = new HashMap<>();
     }
+
     @Override
     public Collection<Campus> findAllCampuses() {
         return campuses.values();
@@ -19,7 +20,7 @@ public class MapCampusStorage implements CampusStorage {
 
     @Override
     public void store(Campus campus) {
-        campuses.put(campus.getLocation(),campus);
+        campuses.put(campus.getLocation(), campus);
     }
 
     @Override

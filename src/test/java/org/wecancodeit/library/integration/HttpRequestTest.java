@@ -25,20 +25,20 @@ public class HttpRequestTest {
     private Campus testCampus;
 
     @BeforeEach
-    public void testClassSetup(){
+    public void testClassSetup() {
         testCampus = new Campus("HTTP Request Test Campus");
         campusStorage.store(testCampus);
     }
 
     @Test
-    public void campusesEndPointReturnsOK(){
+    public void campusesEndPointReturnsOK() {
         ResponseEntity<String> response = testRestTemplate.getForEntity(
                 "http://localhost:" + port + "/campuses", String.class);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
     }
 
     @Test
-    public void specificEndPointReturnsOK(){
+    public void specificEndPointReturnsOK() {
         ResponseEntity<String> response = testRestTemplate.getForEntity(
                 "http://localhost:" + port + "/campuses/" + testCampus.getLocation(), String.class);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);

@@ -9,7 +9,7 @@ import org.wecancodeit.library.storage.BookStorage;
 
 @Controller
 public class BookController {
-    private BookStorage bookStorage;
+    private final BookStorage bookStorage;
 
     public BookController(BookStorage bookStorage) {
         this.bookStorage = bookStorage;

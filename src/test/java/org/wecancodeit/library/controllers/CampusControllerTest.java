@@ -1,11 +1,10 @@
-package org.wecancodeit.library;
+package org.wecancodeit.library.controllers;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.ui.Model;
-import org.wecancodeit.library.controllers.CampusController;
 import org.wecancodeit.library.models.Campus;
 import org.wecancodeit.library.storage.CampusStorage;
 
@@ -34,7 +33,7 @@ public class CampusControllerTest {
     }
 
     @Test
-    public void shouldReturnViewWithOneCampus(){
+    public void shouldReturnViewWithOneCampus() {
         Campus testCampus = new Campus("TESTER TOWN");
         when(mockStorage.findCampusByLocation("LOS TESTA")).thenReturn(testCampus);
 
@@ -43,22 +42,23 @@ public class CampusControllerTest {
         verify(mockStorage).findCampusByLocation("LOS TESTA");
         verify(mockModel).addAttribute("campus", testCampus);
     }
+
     @Test
-    public void shouldReturnViewNamedCampusViewWhenDisplaySingleCampusIsCalled(){
+    public void shouldReturnViewNamedCampusViewWhenDisplaySingleCampusIsCalled() {
         String viewName = underTest.displaySingleCampus("LosTesta", mockModel);
         assertThat(viewName).isEqualTo("campusView");
     }
 
     @Test
-    public void shouldGoToINdivudualEndPoint() throws Exception {
+    public void shouldGoToIndividualEndPoint() throws Exception {
         Campus testCampus = new Campus("TESTER TOWN");
         when(mockStorage.findCampusByLocation("LOS TESTA")).thenReturn(testCampus);
 
         mockMvc.perform(get("/campuses/LOS TESTA"))
-                .andExpect(status().isOk())
-                .andExpect(view().name("campusView"))
-                .andExpect(model().attributeExists("campus"))
-                .andExpect(model().attribute("campus", testCampus));;
+               .andExpect(status().isOk())
+               .andExpect(view().name("campusView"))
+               .andExpect(model().attributeExists("campus"))
+               .andExpect(model().attribute("campus", testCampus));
     }
 
     @Test
@@ -68,10 +68,10 @@ public class CampusControllerTest {
         List<Campus> campusCollection = Collections.singletonList(testCampus);
         when(mockStorage.findAllCampuses()).thenReturn(campusCollection);
         mockMvc.perform(get("/campuses"))
-                .andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(view().name("campusesView"))
-                .andExpect(model().attributeExists("campuses"))
-                .andExpect(model().attribute("campuses", campusCollection));
+               .andDo(print())
+               .andExpect(status().isOk())
+               .andExpect(view().name("campusesView"))
+               .andExpect(model().attributeExists("campuses"))
+               .andExpect(model().attribute("campuses", campusCollection));
     }
 }

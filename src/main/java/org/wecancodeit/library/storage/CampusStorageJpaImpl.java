@@ -5,9 +5,10 @@ import org.wecancodeit.library.models.Campus;
 import org.wecancodeit.library.storage.repositories.CampusRepository;
 
 import java.util.Collection;
+
 @Service
 public class CampusStorageJpaImpl implements CampusStorage {
-    private CampusRepository campusRepository;
+    private final CampusRepository campusRepository;
 
     public CampusStorageJpaImpl(CampusRepository campusRepository) {
 

@@ -16,7 +16,8 @@ public class Author {
     @ManyToMany(mappedBy = "authors")
     private Collection<Book> books;
 
-    public Author(){}
+    public Author() {
+    }
 
     public Author(String firstName, String lastName) {
         this.firstName = firstName;

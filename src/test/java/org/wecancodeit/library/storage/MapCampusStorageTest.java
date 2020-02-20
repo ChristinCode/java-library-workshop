@@ -1,15 +1,13 @@
-package org.wecancodeit.library;
+package org.wecancodeit.library.storage;
 
 import org.junit.jupiter.api.Test;
 import org.wecancodeit.library.models.Campus;
-import org.wecancodeit.library.storage.CampusStorage;
-import org.wecancodeit.library.storage.MapCampusStorage;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class MapCampusStorageTest {
     @Test
-    public void shouldStoreCampusInMap(){
+    public void shouldStoreCampusInMap() {
         Campus testCampus = new Campus("Test Town");
         CampusStorage underTest = new MapCampusStorage();
         underTest.store(testCampus);
@@ -17,14 +15,14 @@ public class MapCampusStorageTest {
     }
 
     @Test
-    public void shouldRetrievSingleCampusByLocation(){
+    public void shouldRetrieveSingleCampusByLocation() {
         Campus testCampus1 = new Campus("Test Town");
         Campus testCampus2 = new Campus("Testville");
         CampusStorage underTest = new MapCampusStorage();
         underTest.store(testCampus1);
         underTest.store(testCampus2);
         Campus retrievedCampus1 = underTest.findCampusByLocation("Test Town");
-        Campus retrievedCampus2=  underTest.findCampusByLocation("Testville");
+        Campus retrievedCampus2 = underTest.findCampusByLocation("Testville");
         assertThat(retrievedCampus1).isEqualTo(testCampus1);
         assertThat(retrievedCampus2).isEqualTo(testCampus2);
     }

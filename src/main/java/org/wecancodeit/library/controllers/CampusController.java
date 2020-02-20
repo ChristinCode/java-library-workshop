@@ -10,15 +10,15 @@ import org.wecancodeit.library.storage.CampusStorage;
 @Controller
 public class CampusController {
 
-    private CampusStorage campusStorage;
+    private final CampusStorage campusStorage;
 
-    public CampusController(CampusStorage campusStorage){
+    public CampusController(CampusStorage campusStorage) {
         this.campusStorage = campusStorage;
     }
 
 
     @RequestMapping("/campuses")
-    public String displayCampuses(Model model){
+    public String displayCampuses(Model model) {
         model.addAttribute("campuses", campusStorage.findAllCampuses());
         return "campusesView";
     }

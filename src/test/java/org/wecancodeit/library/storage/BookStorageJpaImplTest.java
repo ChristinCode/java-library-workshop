@@ -15,17 +15,15 @@ import static org.mockito.Mockito.*;
 class BookStorageJpaImplTest {
     private BookRepository bookRepo;
     private BookStorage underTest;
-    private Campus testCampus;
-    private Author testAuthor;
     private Book testBook;
 
     @BeforeEach
     void setUp() {
         bookRepo = mock(BookRepository.class);
         underTest = new BookStorageJpaImpl(bookRepo);
-        testCampus = new Campus("Test Town");
-        testAuthor = new Author("Testy", "Tester");
-        testBook = new Book("Test Book", testCampus, testAuthor);
+        Campus testCampus = new Campus("Test Town");
+        Author testAuthor = new Author("Testy", "Tester");
+        testBook = new Book("Test Book", "Test Description", testCampus, testAuthor);
 
     }
 
@@ -36,8 +34,9 @@ class BookStorageJpaImplTest {
         Book retrievedBook = underTest.findBookById(1L);
         assertThat(retrievedBook).isEqualTo(testBook);
     }
+
     @Test
-    public void shouldStoreBook(){
+    public void shouldStoreBook() {
         underTest.store(testBook);
         verify(bookRepo).save(testBook);
     }

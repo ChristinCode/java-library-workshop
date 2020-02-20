@@ -1,13 +1,14 @@
-*{
+* {
     margin: 0px;
     padding: 0px;
     box-sizing: border-box;
 }
 
-.book-list{
+.book-list {
     padding-left: 10px;
 }
-.header{
+
+.header {
     display: flex;
     justify-content: center;
     align-items: center;

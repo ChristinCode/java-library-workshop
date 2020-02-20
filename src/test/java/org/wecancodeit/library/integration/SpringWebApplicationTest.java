@@ -8,6 +8,8 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
 import org.wecancodeit.library.models.Campus;
+import org.wecancodeit.library.storage.AuthorStorage;
+import org.wecancodeit.library.storage.BookStorage;
 import org.wecancodeit.library.storage.CampusStorage;
 
 import static org.mockito.Mockito.when;
@@ -24,6 +26,10 @@ public class SpringWebApplicationTest {
     private MockMvc mockMvc;
     @MockBean
     private CampusStorage campusStorage;
+    @MockBean
+    BookStorage bookStorage;
+    @MockBean
+    AuthorStorage authorStorage;
 
     @Test
     public void shouldReceiveOKFromCampusesEndpoint() throws Exception {

@@ -20,8 +20,6 @@ class BookControllerTest {
     private BookController underTest;
     private Model model;
     private BookStorage mockStorage;
-    private Campus testCampus;
-    private Author testAuthor;
     private Book testBook;
 
     @BeforeEach
@@ -29,25 +27,27 @@ class BookControllerTest {
         mockStorage = mock(BookStorage.class);
         underTest = new BookController(mockStorage);
         model = mock(Model.class);
-        testCampus = new Campus("New Test City");
-        testAuthor = new Author("Testa", "Testarosa");
-        testBook = new Book("Testing the Night Away", testCampus, testAuthor);
+        Campus testCampus = new Campus("New Test City");
+        Author testAuthor = new Author("Testa", "Testarosa");
+        testBook = new Book("Testing the Night Away", "Test Description", testCampus, testAuthor);
         when(mockStorage.findBookById(1L)).thenReturn(testBook);
 
     }
 
     @Test
-    public void displayBookReturnsBookTemplate(){
+    public void displayBookReturnsBookTemplate() {
         String result = underTest.displayBook(1L, model);
         assertThat(result).isEqualTo("book-view");
     }
+
     @Test
-    public void displayBookInteractsWithDependenciesCorrectly(){
+    public void displayBookInteractsWithDependenciesCorrectly() {
 
         underTest.displayBook(1L, model);
         verify(mockStorage).findBookById(1L);
         verify(model).addAttribute("book", testBook);
     }
+
     @Test
     public void displayBookMappingIsCorrect() throws Exception {
         MockMvc mockMvc = MockMvcBuilders.standaloneSetup(underTest).build();
