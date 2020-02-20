@@ -1,9 +1,8 @@
-package org.wecancodeit.library;
+package org.wecancodeit.library.models;
 
 import javax.persistence.*;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.List;
 import java.util.Objects;
 
 @Entity

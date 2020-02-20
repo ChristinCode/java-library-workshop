@@ -1,6 +1,10 @@
 package org.wecancodeit.library;
 
 import org.junit.jupiter.api.Test;
+import org.wecancodeit.library.models.Campus;
+import org.wecancodeit.library.storage.repositories.CampusRepository;
+import org.wecancodeit.library.storage.CampusStorage;
+import org.wecancodeit.library.storage.CampusStorageJpaImpl;
 
 import java.util.Collections;
 import java.util.Optional;

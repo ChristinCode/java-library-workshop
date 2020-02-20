@@ -1,6 +1,7 @@
-package org.wecancodeit.library;
+package org.wecancodeit.library.storage.repositories;
 
 import org.springframework.data.repository.CrudRepository;
+import org.wecancodeit.library.models.Campus;
 
 import java.util.Optional;
 

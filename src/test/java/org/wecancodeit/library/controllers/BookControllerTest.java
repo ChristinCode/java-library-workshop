@@ -1,0 +1,60 @@
+package org.wecancodeit.library.controllers;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.ui.Model;
+import org.wecancodeit.library.models.Author;
+import org.wecancodeit.library.models.Book;
+import org.wecancodeit.library.models.Campus;
+import org.wecancodeit.library.storage.BookStorage;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
+class BookControllerTest {
+
+    private BookController underTest;
+    private Model model;
+    private BookStorage mockStorage;
+    private Campus testCampus;
+    private Author testAuthor;
+    private Book testBook;
+
+    @BeforeEach
+    void setUp() {
+        mockStorage = mock(BookStorage.class);
+        underTest = new BookController(mockStorage);
+        model = mock(Model.class);
+        testCampus = new Campus("New Test City");
+        testAuthor = new Author("Testa", "Testarosa");
+        testBook = new Book("Testing the Night Away", testCampus, testAuthor);
+        when(mockStorage.findBookById(1L)).thenReturn(testBook);
+
+    }
+
+    @Test
+    public void displayBookReturnsBookTemplate(){
+        String result = underTest.displayBook(1L, model);
+        assertThat(result).isEqualTo("book-view");
+    }
+    @Test
+    public void displayBookInteractsWithDependenciesCorrectly(){
+
+        underTest.displayBook(1L, model);
+        verify(mockStorage).findBookById(1L);
+        verify(model).addAttribute("book", testBook);
+    }
+    @Test
+    public void displayBookMappingIsCorrect() throws Exception {
+        MockMvc mockMvc = MockMvcBuilders.standaloneSetup(underTest).build();
+        mockMvc.perform(MockMvcRequestBuilders.get("/books/1"))
+               .andExpect(status().isOk())
+               .andExpect(view().name("book-view"))
+               .andExpect(model().attributeExists("book"))
+               .andExpect(model().attribute("book", testBook));
+    }
+}

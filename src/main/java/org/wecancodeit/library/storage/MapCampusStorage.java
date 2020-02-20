@@ -1,6 +1,6 @@
-package org.wecancodeit.library;
+package org.wecancodeit.library.storage;
 
-import org.springframework.stereotype.Service;
+import org.wecancodeit.library.models.Campus;
 
 import java.util.Collection;
 import java.util.HashMap;

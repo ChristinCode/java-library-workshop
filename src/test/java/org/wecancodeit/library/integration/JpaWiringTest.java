@@ -1,12 +1,17 @@
-package org.wecancodeit.library;
+package org.wecancodeit.library.integration;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import org.wecancodeit.library.models.Author;
+import org.wecancodeit.library.models.Book;
+import org.wecancodeit.library.models.Campus;
+import org.wecancodeit.library.storage.repositories.AuthorRepository;
+import org.wecancodeit.library.storage.repositories.BookRepository;
+import org.wecancodeit.library.storage.repositories.CampusRepository;
 
 import java.util.Optional;
-import java.util.Properties;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

@@ -1,6 +1,5 @@
-package org.wecancodeit.library;
+package org.wecancodeit.library.integration;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +8,8 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.wecancodeit.library.models.Campus;
+import org.wecancodeit.library.storage.CampusStorage;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -21,7 +22,7 @@ public class HttpRequestTest {
     private TestRestTemplate testRestTemplate;
     @Autowired
     private CampusStorage campusStorage;
-    private  Campus testCampus;
+    private Campus testCampus;
 
     @BeforeEach
     public void testClassSetup(){

@@ -1,6 +1,9 @@
 package org.wecancodeit.library;
 
 import org.junit.jupiter.api.Test;
+import org.wecancodeit.library.models.Campus;
+import org.wecancodeit.library.storage.CampusStorage;
+import org.wecancodeit.library.storage.MapCampusStorage;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

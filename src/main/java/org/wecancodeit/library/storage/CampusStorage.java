@@ -1,4 +1,6 @@
-package org.wecancodeit.library;
+package org.wecancodeit.library.storage;
+
+import org.wecancodeit.library.models.Campus;
 
 import java.util.Collection;
 

@@ -1,8 +1,9 @@
 package org.wecancodeit.library;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
+import org.wecancodeit.library.models.Campus;
+import org.wecancodeit.library.storage.CampusStorage;
 
 @Component
 public class Populator implements CommandLineRunner {

@@ -1,11 +1,10 @@
-package org.wecancodeit.library;
+package org.wecancodeit.library.models;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import java.util.Collection;
-import java.util.List;
 
 @Entity
 public class Author {

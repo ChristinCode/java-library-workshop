@@ -1,4 +1,4 @@
-package org.wecancodeit.library;
+package org.wecancodeit.library.integration;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
