@@ -22,14 +22,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 public class SpringWebApplicationTest {
 
-    @Autowired
-    private MockMvc mockMvc;
-    @MockBean
-    private CampusStorage campusStorage;
     @MockBean
     BookStorage bookStorage;
     @MockBean
     AuthorStorage authorStorage;
+    @Autowired
+    private MockMvc mockMvc;
+    @MockBean
+    private CampusStorage campusStorage;
 
     @Test
     public void shouldReceiveOKFromCampusesEndpoint() throws Exception {

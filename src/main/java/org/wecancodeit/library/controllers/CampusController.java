@@ -2,14 +2,11 @@ package org.wecancodeit.library.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-
 import org.springframework.web.bind.annotation.*;
 import org.wecancodeit.library.models.Campus;
 import org.wecancodeit.library.storage.AuthorStorage;
 import org.wecancodeit.library.storage.BookStorage;
 import org.wecancodeit.library.storage.CampusStorage;
-
-import javax.persistence.GeneratedValue;
 
 @Controller
 public class CampusController {
@@ -36,7 +33,7 @@ public class CampusController {
     }
 
     @PostMapping("/add-campus")
-    public String  addCampus(@RequestParam String location) {
+    public String addCampus(@RequestParam String location) {
         campusStorage.store(new Campus(location));
         return "redirect:campuses";
     }

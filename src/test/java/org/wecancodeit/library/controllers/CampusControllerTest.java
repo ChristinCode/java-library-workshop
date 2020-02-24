@@ -5,8 +5,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.ui.Model;
-import org.wecancodeit.library.models.Author;
-import org.wecancodeit.library.models.Book;
 import org.wecancodeit.library.models.Campus;
 import org.wecancodeit.library.storage.AuthorStorage;
 import org.wecancodeit.library.storage.BookStorage;
@@ -85,21 +83,23 @@ public class CampusControllerTest {
     }
 
     @Test
-    public void addCampusShouldRedirectToCampusesEndPoint(){
-        String result =underTest.addCampus("Testville");
+    public void addCampusShouldRedirectToCampusesEndPoint() {
+        String result = underTest.addCampus("Testville");
         assertThat(result).isEqualTo("redirect:campuses");
     }
+
     @Test
-    public void addCampusShouldStoreANewCampus(){
+    public void addCampusShouldStoreANewCampus() {
         underTest.addCampus("Testville");
-        verify(mockStorage).store(new Campus("Testville"));
+        verify(campusStorage).store(new Campus("Testville"));
     }
+
     @Test
     public void addCampusEndpointShouldAddNewCampus() throws Exception {
         mockMvc.perform(post("/add-campus")
-                            .param("location", "Testing Town"))
-                .andDo(print())
-                .andExpect(status().is3xxRedirection());
-        verify(mockStorage).store(new Campus("Testing Town"));
+                .param("location", "Testing Town"))
+               .andDo(print())
+               .andExpect(status().is3xxRedirection());
+        verify(campusStorage).store(new Campus("Testing Town"));
     }
 }

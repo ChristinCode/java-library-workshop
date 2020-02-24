@@ -8,6 +8,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.wecancodeit.library.models.Campus;
+import org.wecancodeit.library.storage.AuthorStorage;
 import org.wecancodeit.library.storage.BookStorage;
 import org.wecancodeit.library.storage.CampusStorage;
 
@@ -26,8 +27,11 @@ public class WebLayerTest {
     CampusStorage mockStorage;
     @MockBean
     BookStorage bookStorage;
+    @MockBean
+    AuthorStorage authorStorage;
     @Autowired
     private MockMvc mockMvc;
+
 
     @Test
     public void campusesShouldBeOKAndReturnTheCampusesViewWithCampusesModelAttribute() throws Exception {
@@ -51,7 +55,7 @@ public class WebLayerTest {
     @Test
     public void shouldBeAbleToCreateNewCampus() throws Exception {
         mockMvc.perform(post("/add-campus")
-                  .param("location", "Testville"))
+                .param("location", "Testville"))
                .andExpect(status().is3xxRedirection());
         verify(mockStorage).store(new Campus("Testville"));
     }

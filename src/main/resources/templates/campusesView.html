@@ -9,15 +9,15 @@
 </head>
 
 <body>
-    <h1>We Can Code Libraries</h1>
+<h1>We Can Code Libraries</h1>
 
-    <h2 th:each="campus:${campuses}"><a th:href="@{'/campuses/'+ ${campus.location}}"
-            th:text="${campus.location}">Campus</a>
-    </h2>
-    <form action="add-campus" method="POST">
-        <input type="text" name="location">
-        <button type="submit">Add Campus</button>
-    </form>
+<h2 th:each="campus:${campuses}"><a th:href="@{'/campuses/'+ ${campus.location}}"
+                                    th:text="${campus.location}">Campus</a>
+</h2>
+<form action="add-campus" method="POST">
+    <input name="location" type="text">
+    <button type="submit">Add Campus</button>
+</form>
 
 </body>
 
