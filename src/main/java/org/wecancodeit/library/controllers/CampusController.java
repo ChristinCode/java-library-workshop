@@ -3,8 +3,12 @@ package org.wecancodeit.library.controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.wecancodeit.library.models.Campus;
+import org.wecancodeit.library.storage.AuthorStorage;
+import org.wecancodeit.library.storage.BookStorage;
 import org.wecancodeit.library.storage.CampusStorage;
 
 @Controller
@@ -12,12 +16,12 @@ public class CampusController {
 
     private final CampusStorage campusStorage;
 
-    public CampusController(CampusStorage campusStorage) {
+    public CampusController(CampusStorage campusStorage, AuthorStorage authorStorage, BookStorage bookStorage) {
         this.campusStorage = campusStorage;
     }
 
 
-    @RequestMapping("/campuses")
+    @RequestMapping({"/campuses", "/", ""})
     public String displayCampuses(Model model) {
         model.addAttribute("campuses", campusStorage.findAllCampuses());
         return "campusesView";
@@ -30,4 +34,11 @@ public class CampusController {
 
         return "campusView";
     }
+    @PostMapping("/add-campus")
+    public String addCampus(@RequestParam String location) {
+        campusStorage.store(new Campus(location));
+        return "redirect:campuses";
+    }
+
+
 }

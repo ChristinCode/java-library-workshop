@@ -11,8 +11,10 @@ import org.wecancodeit.library.models.Campus;
 import org.wecancodeit.library.storage.BookStorage;
 import org.wecancodeit.library.storage.CampusStorage;
 
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -44,6 +46,14 @@ public class WebLayerTest {
                .andExpect(status().isOk())
                .andExpect(view().name("campusView"))
                .andExpect(model().attributeExists("campus"));
+    }
+
+    @Test
+    public void shouldBeAbleToCreateNewCampus() throws Exception {
+        mockMvc.perform(post("/add-campus")
+                  .param("location", "Testville"))
+               .andExpect(status().is3xxRedirection());
+        verify(mockStorage).store(new Campus("Testville"));
     }
 
 }

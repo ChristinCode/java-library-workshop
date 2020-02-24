@@ -43,4 +43,5 @@ public class HttpRequestTest {
                 "http://localhost:" + port + "/campuses/" + testCampus.getLocation(), String.class);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
     }
+
 }
