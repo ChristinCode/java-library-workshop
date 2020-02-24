@@ -1,6 +1,8 @@
 package org.wecancodeit.library.storage;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.wecancodeit.library.models.Campus;
 import org.wecancodeit.library.storage.repositories.CampusRepository;
 
@@ -27,6 +29,13 @@ public class CampusStorageJpaImpl implements CampusStorage {
 
     @Override
     public Campus findCampusByLocation(String campusLocation) {
-        return campusRepository.findByLocation(campusLocation).get();
+        Campus retrievedCampus;
+        try {
+            retrievedCampus = campusRepository.findByLocation(campusLocation).get();
+        } catch (Exception e) {
+            throw new CampusNotFoundException(e.getMessage());
+        }
+        System.out.println("EXCEPTION NOT THROWN");
+        return retrievedCampus;
     }
 }
