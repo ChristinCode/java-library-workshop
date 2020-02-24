@@ -71,7 +71,7 @@ public class CampusControllerTest {
     }
 
     @Test
-    public void campusControllerShouldInstantiate() throws Exception {
+    public void campusesEndPointDisplaysAllCampuses() throws Exception {
         Campus testCampus = new Campus("Columbus");
 
         List<Campus> campusCollection = Collections.singletonList(testCampus);
@@ -85,38 +85,21 @@ public class CampusControllerTest {
     }
 
     @Test
-    public void addCampusEndPointRedirectsToCampusesView() {
-        String result = underTest.addCampus("Test Town");
+    public void addCampusShouldRedirectToCampusesEndPoint(){
+        String result =underTest.addCampus("Testville");
         assertThat(result).isEqualTo("redirect:campuses");
     }
-
     @Test
-    public void addCampusShouldStoreCampusToStorage() {
-        underTest.addCampus("Test Town");
-        verify(campusStorage).store(new Campus("Test Town"));
+    public void addCampusShouldStoreANewCampus(){
+        underTest.addCampus("Testville");
+        verify(mockStorage).store(new Campus("Testville"));
     }
-
     @Test
-    public void shouldBeAbleToCreateNewCampus() throws Exception {
+    public void addCampusEndpointShouldAddNewCampus() throws Exception {
         mockMvc.perform(post("/add-campus")
-                .param("location", "Testville"))
-               .andExpect(status().is3xxRedirection());
-        verify(campusStorage).store(new Campus("Testville"));
-    }
-
-    @Test
-    public void shouldBeAbleToAddBookToCampus() throws Exception {
-
-        Campus mockCampus = mock(Campus.class);
-        Author mockAuthor=mock(Author.class);
-        when()
-        mockMvc.perform(post("/campuses/Testville/add-book")
-                        .param("title", "Test Book")
-                        .param("description", "This is a test book")
-                        .param("campusId", "1")
-                        .param("authorId", "1"))
-               .andExpect(status().is3xxRedirection());
-        verify(bookStorage).store(new Book("Test Book", "This is a test book", mockCampus, mockAuthor));
-
+                            .param("location", "Testing Town"))
+                .andDo(print())
+                .andExpect(status().is3xxRedirection());
+        verify(mockStorage).store(new Campus("Testing Town"));
     }
 }

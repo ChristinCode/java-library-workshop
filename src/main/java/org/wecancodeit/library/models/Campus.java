@@ -45,16 +45,15 @@ public class Campus {
         return Objects.hash(location);
     }
 
+    public Collection<Book> getBooks() {
+        return books;
+    }
+
     @Override
     public String toString() {
         return "Campus{" +
                 "id=" + id +
                 ", location='" + location + '\'' +
-                ", books=" + books +
                 '}';
-    }
-
-    public Collection<Book> getBooks() {
-        return books;
     }
 }
