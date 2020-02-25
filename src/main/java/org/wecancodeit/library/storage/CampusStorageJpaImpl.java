@@ -35,7 +35,6 @@ public class CampusStorageJpaImpl implements CampusStorage {
         } catch (Exception e) {
             throw new CampusNotFoundException(e.getMessage());
         }
-        System.out.println("EXCEPTION NOT THROWN");
         return retrievedCampus;
     }
 }

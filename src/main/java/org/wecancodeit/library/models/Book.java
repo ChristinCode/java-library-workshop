@@ -1,8 +1,9 @@
 package org.wecancodeit.library.models;
 
+import org.thymeleaf.expression.Lists;
+
 import javax.persistence.*;
-import java.util.Arrays;
-import java.util.Collection;
+import java.util.*;
 
 @Entity
 public class Book {
@@ -15,13 +16,17 @@ public class Book {
     @ManyToOne
     private Campus campus;
     private String title;
+    @ManyToMany
+    private Set<HashTag> hashTags;
 
     public Book(String title, String description, Campus campus, Author... authors) {
 
         this.title = title;
         this.description = description;
-        this.authors = Arrays.asList(authors);
+        this.authors = new ArrayList<>(Arrays.asList(authors));
+        //this.authors = Arrays.asList(authors);
         this.campus = campus;
+        this.hashTags = new HashSet<>();
     }
 
     public Book() {
@@ -77,5 +82,14 @@ public class Book {
         result = 31 * result + (getCampus() != null ? getCampus().hashCode() : 0);
         result = 31 * result + (getTitle() != null ? getTitle().hashCode() : 0);
         return result;
+    }
+
+    public void addHashTag(HashTag hashTagTOAdd) {
+        hashTags.add(hashTagTOAdd);
+
+    }
+
+    public Collection<HashTag> getHashTags() {
+            return hashTags;
     }
 }

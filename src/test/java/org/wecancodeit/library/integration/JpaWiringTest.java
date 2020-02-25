@@ -89,5 +89,19 @@ public class JpaWiringTest {
         HashTag testHashTag2 = hashTagRepo.save(new HashTag("Sweet"));
         HashTag testHashTag3 = hashTagRepo.save(new HashTag("#Dude"));
         testBook1.addHashTag(testHashTag1);
+        testBook1.addHashTag(testHashTag2);
+        bookRepo.save(testBook1);
+        testBook2.addHashTag(testHashTag3);
+        testBook2.addHashTag(testHashTag1);
+        bookRepo.save(testBook2);
+
+        entityManager.flush();
+        entityManager.clear();
+
+        Book retreivedBook1 = bookRepo.findById(testBook1.getId()).get();
+        Book retreivedBook2 = bookRepo.findById(testBook2.getId()).get();
+
+        assertThat(retreivedBook1.getHashTags()).contains(testHashTag1, testHashTag2);
+        assertThat(retreivedBook2.getHashTags()).contains(testHashTag1, testHashTag3);
     }
 }

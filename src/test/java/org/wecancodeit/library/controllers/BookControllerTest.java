@@ -10,6 +10,7 @@ import org.wecancodeit.library.models.Author;
 import org.wecancodeit.library.models.Book;
 import org.wecancodeit.library.models.Campus;
 import org.wecancodeit.library.storage.BookStorage;
+import org.wecancodeit.library.storage.repositories.HashTagRepository;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
@@ -21,11 +22,13 @@ class BookControllerTest {
     private Model model;
     private BookStorage mockStorage;
     private Book testBook;
+    private HashTagRepository hashTagRepo;
 
     @BeforeEach
     void setUp() {
         mockStorage = mock(BookStorage.class);
-        underTest = new BookController(mockStorage);
+        hashTagRepo = mock(HashTagRepository.class);
+        underTest = new BookController(mockStorage, hashTagRepo);
         model = mock(Model.class);
         Campus testCampus = new Campus("New Test City");
         Author testAuthor = new Author("Testa", "Testarosa");
