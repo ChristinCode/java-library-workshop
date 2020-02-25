@@ -7,11 +7,14 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.wecancodeit.library.models.Author;
 import org.wecancodeit.library.models.Book;
 import org.wecancodeit.library.models.Campus;
+import org.wecancodeit.library.models.HashTag;
 import org.wecancodeit.library.storage.repositories.AuthorRepository;
 import org.wecancodeit.library.storage.repositories.BookRepository;
 import org.wecancodeit.library.storage.repositories.CampusRepository;
+import org.wecancodeit.library.storage.repositories.HashTagRepository;
 
 import java.util.Optional;
+import java.util.Properties;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -25,6 +28,8 @@ public class JpaWiringTest {
     private TestEntityManager entityManager;
     @Autowired
     private AuthorRepository authorRepo;
+    @Autowired
+    private HashTagRepository hashTagRepo;
 
     @Test
     public void campusShouldHaveAListOfBooks() {
@@ -71,5 +76,18 @@ public class JpaWiringTest {
         assertThat(retrievedBook.getAuthors()).contains(testAuthor1, testAuthor2);
         assertThat(retrievedAuthor1.getBooks()).contains(testBook1, testBook3);
         assertThat(retrievedAuthor2.getBooks()).contains(testBook1, testBook2);
+    }
+
+    @Test
+    public void booksShouldHaveHashTags(){
+        Author testAuthor1 = authorRepo.save(new Author("Testy", "McTesterson"));
+        Campus testCampus = campusRepo.save(new Campus("Test Town"));
+        Book testBook1 = bookRepo.save(new Book("Title1", "Test Description", testCampus, testAuthor1));
+        Book testBook2 = bookRepo.save(new Book("Another Title", "Another Description", testCampus, testAuthor1));
+        Book testBook3 = bookRepo.save(new Book("Yet Another Book", "Yet another description", testCampus, testAuthor1));
+        HashTag testHashTag1 = hashTagRepo.save(new HashTag("Dude"));
+        HashTag testHashTag2 = hashTagRepo.save(new HashTag("Sweet"));
+        HashTag testHashTag3 = hashTagRepo.save(new HashTag("#Dude"));
+        testBook1.addHashTag(testHashTag1);
     }
 }
